@@ -1,0 +1,37 @@
+target_layer,target_schema,target_table,table_type,table_version,column_name,datatype,business_description,transformation_logic,source_layer,source_schema,source_table,source_columns
+
+FDP,banking,customers_clean,DIMENSION,1,customer_id,INT,Unique customer identifier,customer_id,ODP,banking,customers_raw,customer_id
+FDP,banking,customers_clean,DIMENSION,1,full_name,VARCHAR,Concatenated customer name,"CONCAT(first_name,' ',last_name)",ODP,banking,customers_raw,first_name|last_name
+FDP,banking,customers_clean,DIMENSION,1,customer_rank,INT,Rank customers by account count,"RANK() OVER (ORDER BY COUNT(account_id) DESC)",ODP,banking,accounts_raw,account_id
+FDP,banking,customers_clean,DIMENSION,1,kyc_status,VARCHAR,KYC validation flag,"CASE WHEN email IS NOT NULL THEN 'VERIFIED' ELSE 'PENDING' END",ODP,banking,customers_raw,email
+FDP,banking,customers_clean,DIMENSION,1,last_updated,TIMESTAMP,Latest record timestamp,"MAX(created_at)",ODP,banking,customers_raw,created_at
+
+FDP,finance,transactions_enriched,FACT,1,transaction_id,INT,Unique transaction id,transaction_id,ODP,finance,transactions_raw,transaction_id
+FDP,finance,transactions_enriched,FACT,1,amount_category,VARCHAR,High/Medium/Low value txn,"CASE WHEN amount > 10000 THEN 'HIGH' WHEN amount > 1000 THEN 'MEDIUM' ELSE 'LOW' END",ODP,finance,transactions_raw,amount
+FDP,finance,transactions_enriched,FACT,1,txn_rank_per_account,INT,Rank transactions per account,"RANK() OVER (PARTITION BY account_id ORDER BY amount DESC)",ODP,finance,transactions_raw,account_id|amount
+FDP,finance,transactions_enriched,FACT,1,cumulative_spend,DECIMAL,Running total per account,"SUM(amount) OVER (PARTITION BY account_id ORDER BY transaction_date)",ODP,finance,transactions_raw,amount|transaction_date
+FDP,finance,transactions_enriched,FACT,1,txn_month,DATE,Transaction month,"DATE_TRUNC('month',transaction_date)",ODP,finance,transactions_raw,transaction_date
+
+FDP,finance,loans_enriched,FACT,1,loan_id,INT,Unique loan identifier,loan_id,ODP,finance,loans_raw,loan_id
+FDP,finance,loans_enriched,FACT,1,risk_category,VARCHAR,Risk bucket based on rate,"CASE WHEN interest_rate > 12 THEN 'HIGH_RISK' ELSE 'LOW_RISK' END",ODP,finance,loans_raw,interest_rate
+FDP,finance,loans_enriched,FACT,1,loan_rank,INT,Rank loans by amount,"RANK() OVER (ORDER BY loan_amount DESC)",ODP,finance,loans_raw,loan_amount
+FDP,finance,loans_enriched,FACT,1,avg_interest,DECIMAL,Average interest per customer,"AVG(interest_rate) OVER (PARTITION BY customer_id)",ODP,finance,loans_raw,interest_rate
+FDP,finance,loans_enriched,FACT,1,loan_status,VARCHAR,Derived status,"CASE WHEN loan_amount > 500000 THEN 'PRIORITY' ELSE 'NORMAL' END",ODP,finance,loans_raw,loan_amount
+
+CDP,analytics,customer_360,AGGREGATE,1,customer_id,INT,Customer identifier,customer_id,FDP,banking,customers_clean,customer_id
+CDP,analytics,customer_360,AGGREGATE,1,total_accounts,INT,Total accounts per customer,"COUNT(DISTINCT account_id)",FDP,banking,accounts_enriched,account_id
+CDP,analytics,customer_360,AGGREGATE,1,total_loans,INT,Total loans per customer,"COUNT(DISTINCT loan_id)",FDP,finance,loans_enriched,loan_id
+CDP,analytics,customer_360,AGGREGATE,1,total_spend,DECIMAL,Total spend per customer,"SUM(amount)",FDP,finance,transactions_enriched,amount
+CDP,analytics,customer_360,AGGREGATE,1,spend_rank,INT,Rank customers by total spend,"RANK() OVER (ORDER BY SUM(amount) DESC)",FDP,finance,transactions_enriched,amount
+
+CDP,analytics,transaction_summary,AGGREGATE,1,account_id,INT,Account identifier,account_id,FDP,finance,transactions_enriched,account_id
+CDP,analytics,transaction_summary,AGGREGATE,1,total_transactions,INT,Total transactions count,"COUNT(transaction_id)",FDP,finance,transactions_enriched,transaction_id
+CDP,analytics,transaction_summary,AGGREGATE,1,total_credit_amount,DECIMAL,Total credit amount,"SUM(CASE WHEN amount > 0 THEN amount END)",FDP,finance,transactions_enriched,amount
+CDP,analytics,transaction_summary,AGGREGATE,1,total_debit_amount,DECIMAL,Total debit amount,"SUM(CASE WHEN amount < 0 THEN amount END)",FDP,finance,transactions_enriched,amount
+CDP,analytics,transaction_summary,AGGREGATE,1,account_rank,INT,Rank accounts by transaction volume,"DENSE_RANK() OVER (ORDER BY COUNT(transaction_id) DESC)",FDP,finance,transactions_enriched,transaction_id
+
+CDP,analytics,revenue_dashboard,KPI,1,total_bank_revenue,DECIMAL,Total banking revenue,"SUM(total_spend)",CDP,analytics,customer_360,total_spend
+CDP,analytics,revenue_dashboard,KPI,1,total_transport_revenue,DECIMAL,Transport revenue,"SUM(total_revenue)",CDP,analytics,transport_kpi,total_revenue
+CDP,analytics,revenue_dashboard,KPI,1,total_interest_income,DECIMAL,Total interest from loans,"SUM(loan_amount * avg_interest/100)",FDP,finance,loans_enriched,loan_amount|avg_interest
+CDP,analytics,revenue_dashboard,KPI,1,top_customer,INT,Top spending customer,"MAX(customer_id) KEEP (DENSE_RANK FIRST ORDER BY total_spend DESC)",CDP,analytics,customer_360,total_spend
+CDP,analytics,revenue_dashboard,KPI,1,report_month,DATE,Reporting month,"DATE_TRUNC('month',CURRENT_DATE)",SYSTEM,SYSTEM,N/A

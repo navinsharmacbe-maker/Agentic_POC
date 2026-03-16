@@ -1,0 +1,177 @@
+[
+  {
+    "layer": "CDP",
+    "schema": "analytics",
+    "name": "customer_360",
+    "type": "AGGREGATE",
+    "version": 1,
+    "columns": [
+      {
+        "name": "customer_id",
+        "description": "Unique identifier for the customer",
+        "datatype": "INT",
+        "is_pk": true,
+        "is_fk": false
+      },
+      {
+        "name": "total_accounts",
+        "description": "Total number of accounts",
+        "datatype": "INT",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "total_loans",
+        "description": "Total number of loans",
+        "datatype": "INT",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "total_spend",
+        "description": "Total spend by customer",
+        "datatype": "DECIMAL",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "customer_segment",
+        "description": "Segment of customer",
+        "datatype": "VARCHAR",
+        "is_pk": false,
+        "is_fk": false
+      }
+    ],
+    "description": "CDP table with customer 360 report data"
+  },
+  {
+    "layer": "CDP",
+    "schema": "analytics",
+    "name": "transaction_summary",
+    "type": "AGGREGATE",
+    "version": 1,
+    "columns": [
+      {
+        "name": "account_id",
+        "datatype": "INT",
+        "is_pk": true,
+        "is_fk": false
+      },
+      {
+        "name": "total_transactions",
+        "datatype": "INT",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "total_credit_amount",
+        "datatype": "DECIMAL",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "total_debit_amount",
+        "datatype": "DECIMAL",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "summary_month",
+        "datatype": "DATE",
+        "is_pk": false,
+        "is_fk": false
+      }
+    ],
+    "description": "CDP table with transaction summary data"
+  },
+  {
+    "layer": "CDP",
+    "schema": "analytics",
+    "name": "loan_summary",
+    "type": "AGGREGATE",
+    "version": 1,
+    "columns": [
+      {
+        "name": "loan_id",
+        "description": "Unique identifier for the loan",
+        "datatype": "INT",
+        "is_pk": true,
+        "is_fk": false
+      },
+      {
+        "name": "customer_id",
+        "description": "Unique identifier for the customer",
+        "datatype": "INT",
+        "is_pk": false,
+        "is_fk": true
+      },
+      {
+        "name": "total_loan_amount",
+        "description": "Total loan amount",
+        "datatype": "DECIMAL",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "outstanding_balance",
+        "description": "Outstanding balance of loan",
+        "datatype": "DECIMAL",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "loan_risk_category",
+        "description": "Risk category of loan",
+        "datatype": "VARCHAR",
+        "is_pk": false,
+        "is_fk": false
+      }
+    ],
+    "description": "CDP table with loan summary data"
+  },
+  {
+    "layer": "CDP",
+    "schema": "analytics",
+    "name": "arrears_summary",
+    "type": "AGGREGATE",
+    "version": 1,
+    "columns": [
+      {
+        "name": "loan_id",
+        "description": "Unique identifier for the loan",
+        "datatype": "INT",
+        "is_pk": true,
+        "is_fk": false
+      },
+      {
+        "name": "customer_id",
+        "description": "Unique identifier for the customer",
+        "datatype": "INT",
+        "is_pk": false,
+        "is_fk": true
+      },
+      {
+        "name": "current_arrears",
+        "description": "Current arrears of loan",
+        "datatype": "DECIMAL",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "pending_principal",
+        "description": "Pending principal of loan",
+        "datatype": "DECIMAL",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "no_of_total_arrears",
+        "description": "Number of total arrears by this customer",
+        "datatype": "INT",
+        "is_pk": false,
+        "is_fk": false
+      }
+    ],
+    "description": "CDP table with arrears summary data"
+  }
+]

@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+python-multipart
+langchain
+langchain-openai
+deepagents
+neo4j
+pandas
+dotenv
+dotenv-python
+mcp
+sqlglot
+rapidfuzz

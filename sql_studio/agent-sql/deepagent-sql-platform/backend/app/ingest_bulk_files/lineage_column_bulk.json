@@ -1,0 +1,31 @@
+[
+  {"source_version": "ODP.banking.customers_raw.v1.customer_id", "target_version": "FDP.banking.customers_clean.v1.customer_id"},
+  {"source_version": "FDP.banking.customers_clean.v1.customer_id", "target_version": "CDP.analytics.customer_360.v1.customer_id"},
+
+  {"source_version": "ODP.banking.accounts_raw.v1.account_id", "target_version": "FDP.banking.accounts_enriched.v1.account_id"},
+  {"source_version": "FDP.banking.accounts_enriched.v1.account_id", "target_version": "CDP.analytics.account_summary.v1.account_id"},
+
+  {"source_version": "ODP.finance.transactions_raw.v1.amount", "target_version": "FDP.finance.transactions_enriched.v1.amount"},
+  {"source_version": "FDP.finance.transactions_enriched.v1.amount", "target_version": "CDP.analytics.transaction_summary.v1.total_credit_amount"},
+
+  {"source_version": "ODP.finance.loans_raw.v1.loan_amount", "target_version": "FDP.finance.loans_enriched.v1.loan_amount"},
+  {"source_version": "FDP.finance.loans_enriched.v1.loan_amount", "target_version": "CDP.analytics.loan_summary.v1.total_loan_amount"},
+
+  {"source_version": "ODP.banking.branches_raw.v1.branch_id", "target_version": "FDP.banking.branch_performance.v1.branch_id"},
+  {"source_version": "FDP.banking.branch_performance.v1.branch_id", "target_version": "CDP.analytics.branch_kpi.v1.branch_id"},
+
+  {"source_version": "ODP.banking.atm_logs_raw.v1.atm_id", "target_version": "FDP.banking.atm_usage_summary.v1.atm_id"},
+  {"source_version": "FDP.banking.atm_usage_summary.v1.atm_id", "target_version": "CDP.analytics.atm_kpi.v1.atm_id"},
+
+  {"source_version": "ODP.finance.credit_cards_raw.v1.card_id", "target_version": "FDP.finance.credit_card_summary.v1.card_id"},
+  {"source_version": "FDP.finance.credit_card_summary.v1.card_id", "target_version": "CDP.analytics.credit_card_kpi.v1.card_id"},
+
+  {"source_version": "ODP.transport.transport_trips_raw.v1.trip_id", "target_version": "FDP.transport.transport_trip_enriched.v1.trip_id"},
+  {"source_version": "FDP.transport.transport_trip_enriched.v1.trip_id", "target_version": "CDP.analytics.transport_kpi.v1.vehicle_id"},
+
+  {"source_version": "ODP.transport.fuel_transactions_raw.v1.vehicle_id", "target_version": "FDP.transport.fuel_cost_summary.v1.vehicle_id"},
+  {"source_version": "FDP.transport.fuel_cost_summary.v1.vehicle_id", "target_version": "CDP.analytics.fuel_kpi.v1.vehicle_id"},
+
+  {"source_version": "ODP.finance.payments_raw.v1.payment_amount", "target_version": "FDP.finance.payments_enriched.v1.payment_amount"},
+  {"source_version": "FDP.finance.payments_enriched.v1.payment_amount", "target_version": "CDP.analytics.revenue_dashboard.v1.total_bank_revenue"}
+]
