@@ -1,0 +1,248 @@
+[
+  {
+    "layer": "ODP",
+    "schema": "banking",
+    "name": "customers_raw",
+    "type": "BASE",
+    "version": 1,
+    "columns": [
+      {
+        "name": "customer_id",
+        "description": "Unique identifier for the customer",
+        "datatype": "INT",
+        "is_pk": true,
+        "is_fk": false
+      },
+      {
+        "name": "first_name",
+        "description": "First name of the customer",
+        "datatype": "VARCHAR",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "last_name",
+        "description": "Last name of the customer",
+        "datatype": "VARCHAR",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "email",
+        "description": "Email address of the customer",
+        "datatype": "VARCHAR",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "created_at",
+        "description": "Date when the customer was created",
+        "datatype": "TIMESTAMP",
+        "is_pk": false,
+        "is_fk": false
+      }
+    ],
+    "description": "ODP table with customer data"
+  },
+  {
+    "layer": "ODP",
+    "schema": "banking",
+    "name": "accounts_raw",
+    "type": "BASE",
+    "version": 1,
+    "columns": [
+      {
+        "name": "account_id",
+        "description": "Unique identifier for the account",
+        "datatype": "INT",
+        "is_pk": true,
+        "is_fk": false
+      },
+      {
+        "name": "customer_id",
+        "description": "Unique identifier for the customer",
+        "datatype": "INT",
+        "is_pk": false,
+        "is_fk": true
+      },
+      {
+        "name": "account_type",
+        "description": "Type of account",
+        "datatype": "VARCHAR",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "balance",
+        "description": "Balance in the account",
+        "datatype": "DECIMAL",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "opened_date",
+        "description": "Date when the account was opened",
+        "datatype": "DATE",
+        "is_pk": false,
+        "is_fk": false
+      }
+    ],
+    "description": "ODP table to link customers with accounts"
+  },
+  {
+    "layer": "ODP",
+    "schema": "finance",
+    "name": "transactions_raw",
+    "type": "BASE",
+    "version": 1,
+    "columns": [
+      {
+        "name": "transaction_id",
+        "description": "Unique identifier for the transaction",
+        "datatype": "INT",
+        "is_pk": true,
+        "is_fk": false
+      },
+      {
+        "name": "account_id",
+        "description": "Unique identifier for the account",
+        "datatype": "INT",
+        "is_pk": false,
+        "is_fk": true
+      },
+      {
+        "name": "transaction_type",
+        "description": "Type of transaction",
+        "datatype": "VARCHAR",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "amount",
+        "description": "Amount of transaction",
+        "datatype": "DECIMAL",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "transaction_date",
+        "description": "Date when the transaction was made",
+        "datatype": "TIMESTAMP",
+        "is_pk": false,
+        "is_fk": false
+      }
+    ],
+    "description": "ODP table with transaction data against accounts"
+  },
+  {
+    "layer": "ODP",
+    "schema": "finance",
+    "name": "loans_raw",
+    "type": "BASE",
+    "version": 1,
+    "columns": [
+      {
+        "name": "loan_id",
+        "description": "Unique identifier for the loan",
+        "datatype": "INT",
+        "is_pk": true,
+        "is_fk": false
+      },
+      {
+        "name": "customer_id",
+        "description": "Unique identifier for the customer",
+        "datatype": "INT",
+        "is_pk": false,
+        "is_fk": true
+      },
+      {
+        "name": "loan_type",
+        "description": "Type of loan",
+        "datatype": "VARCHAR",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "loan_amount",
+        "description": "Amount of loan",
+        "datatype": "DECIMAL",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "interest_rate",
+        "description": "Interest rate of loan",
+        "datatype": "DECIMAL",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "loan_start_date",
+        "description": "Date when the loan was started",
+        "datatype": "DATE",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "loan_end_date",
+        "description": "Date when the loan will end",
+        "datatype": "DATE",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "loan_status",
+        "description": "Status of the loan",
+        "datatype": "VARCHAR",
+        "is_pk": false,
+        "is_fk": false
+      }
+    ],
+    "description": "ODP table with loan data against customer"
+  },
+  {
+    "layer": "ODP",
+    "schema": "banking",
+    "name": "customer_kyc_raw",
+    "type": "BASE",
+    "version": 1,
+    "columns": [
+      {
+        "name": "customer_id",
+        "description": "Unique identifier for the customer",
+        "datatype": "INT",
+        "is_pk": true,
+        "is_fk": false
+      },
+      {
+        "name": "kyc_status",
+        "description": "Status of the KYC",
+        "datatype": "VARCHAR",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "kyc_verified_date",
+        "description": "Date when the KYC was verified",
+        "datatype": "DATE",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "kyc_expiry_date",
+        "description": "Date when the KYC will expire",
+        "datatype": "DATE",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "kyc_documents_submitted",
+        "description": "Documents submitted for KYC",
+        "datatype": "VARCHAR",
+        "is_pk": false,
+        "is_fk": false
+      }
+    ],
+    "description": "ODP table kyc for customers"
+  }
+]

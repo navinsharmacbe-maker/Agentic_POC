@@ -1,0 +1,26 @@
+[
+  {
+    "src": "ODP.banking.accounts_raw.v1.customer_id",
+    "tgt": "ODP.banking.customers_raw.v1.customer_id"
+  },
+  {
+    "src": "ODP.finance.transactions_raw.v1.account_id",
+    "tgt": "ODP.banking.accounts_raw.v1.account_id"
+  },
+  {
+    "src": "ODP.finance.loans_raw.v1.customer_id",
+    "tgt": "ODP.banking.customers_raw.v1.customer_id"
+  },
+  {
+    "src": "FDP.banking.accounts_enriched.v1.customer_id",
+    "tgt": "FDP.banking.customers_clean.v1.customer_id"
+  },
+  {
+    "src": "FDP.finance.transactions_enriched.v1.account_id",
+    "tgt": "FDP.banking.accounts_enriched.v1.account_id"
+  },
+  {
+    "src": "FDP.finance.loans_enriched.v1.customer_id",
+    "tgt": "FDP.banking.customers_clean.v1.customer_id"
+  }
+]

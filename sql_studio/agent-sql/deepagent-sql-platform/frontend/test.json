@@ -1,0 +1,27 @@
+{
+  "layer": "CDP",
+  "schema": "analytics",
+  "name": "orders_summary",
+  "type": "AGGREGATE",
+  "version": 1,
+  "columns": [
+    {
+      "name": "customer_id",
+      "datatype": "INT",
+      "is_pk": true,
+      "is_fk": false
+    },
+    {
+      "name": "total_orders",
+      "datatype": "INT",
+      "is_pk": false,
+      "is_fk": false
+    },
+    {
+      "name": "total_amount",
+      "datatype": "DECIMAL",
+      "is_pk": false,
+      "is_fk": false
+    }
+  ]
+}

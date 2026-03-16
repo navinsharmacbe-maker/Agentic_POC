@@ -1,0 +1,210 @@
+[
+  {
+    "layer": "FDP",
+    "schema": "banking",
+    "name": "customers_clean",
+    "type": "DIMENSION",
+    "version": 1,
+    "columns": [
+      {
+        "name": "customer_id",
+        "description": "Unique identifier for the customer",
+        "datatype": "INT",
+        "is_pk": true,
+        "is_fk": false
+      },
+      {
+        "name": "full_name",
+        "description": "Full name of the customer",
+        "datatype": "VARCHAR",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "email",
+        "description": "Email address of the customer",
+        "datatype": "VARCHAR",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "kyc_status",
+        "description": "Status of the KYC",
+        "datatype": "VARCHAR",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "updated_at",
+        "description": "Date when the customer was updated",
+        "datatype": "TIMESTAMP",
+        "is_pk": false,
+        "is_fk": false
+      }
+    ],
+    "description": "FDP table with clean customer data"
+  },
+  {
+    "layer": "FDP",
+    "schema": "banking",
+    "name": "accounts_enriched",
+    "type": "FACT",
+    "version": 1,
+    "columns": [
+      {
+        "name": "account_id",
+        "description": "Unique identifier for the account",
+        "datatype": "INT",
+        "is_pk": true,
+        "is_fk": false
+      },
+      {
+        "name": "customer_id",
+        "description": "Unique identifier for the customer",
+        "datatype": "INT",
+        "is_pk": false,
+        "is_fk": true
+      },
+      {
+        "name": "account_type",
+        "description": "Type of account",
+        "datatype": "VARCHAR",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "current_balance",
+        "description": "Current balance in the account",
+        "datatype": "DECIMAL",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "account_status",
+        "description": "Status of the account",
+        "datatype": "VARCHAR",
+        "is_pk": false,
+        "is_fk": false
+      }
+    ],
+    "description": "FDP table with enriched account data"
+  },
+  {
+    "layer": "FDP",
+    "schema": "finance",
+    "name": "transactions_enriched",
+    "type": "FACT",
+    "version": 1,
+    "columns": [
+      {
+        "name": "transaction_id",
+        "description": "Unique identifier for the transaction",
+        "datatype": "INT",
+        "is_pk": true,
+        "is_fk": false
+      },
+      {
+        "name": "account_id",
+        "description": "Unique identifier for the account",
+        "datatype": "INT",
+        "is_pk": false,
+        "is_fk": true
+      },
+      {
+        "name": "amount",
+        "description": "Amount of transaction",
+        "datatype": "DECIMAL",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "category",
+        "description": "Category of transaction",
+        "datatype": "VARCHAR",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "processed_date",
+        "description": "Date when the transaction was processed",
+        "datatype": "TIMESTAMP",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "is_flagged",
+        "description": "Flag for transaction",
+        "datatype": "BOOLEAN",
+        "is_pk": false,
+        "is_fk": false
+      }
+    ],
+    "description": "FDP table with enriched transaction data"
+  },
+  {
+    "layer": "FDP",
+    "schema": "finance",
+    "name": "loans_enriched",
+    "type": "FACT",
+    "version": 1,
+    "columns": [
+      {
+        "name": "loan_id",
+        "description": "Unique identifier for the loan",
+        "datatype": "INT",
+        "is_pk": true,
+        "is_fk": false
+      },
+      {
+        "name": "customer_id",
+        "description": "Unique identifier for the customer",
+        "datatype": "INT",
+        "is_pk": false,
+        "is_fk": true
+      },
+      {
+        "name": "loan_amount",
+        "description": "Amount of loan",
+        "datatype": "DECIMAL",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "outstanding_balance",
+        "description": "Outstanding balance of loan",
+        "datatype": "DECIMAL",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "loan_status",
+        "description": "Status of the loan",
+        "datatype": "VARCHAR",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "term_pending",
+        "description": "Term pending of loan",
+        "datatype": "INT",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "disbursal_date",
+        "description": "Disbursal date of loan",
+        "datatype": "DATE",
+        "is_pk": false,
+        "is_fk": false
+      },
+      {
+        "name": "arrears",
+        "description": "Arrears of loan",
+        "datatype": "DECIMAL",
+        "is_pk": false,
+        "is_fk": false
+      }
+    ],
+    "description": "FDP table with enriched loan data"
+  }
+]

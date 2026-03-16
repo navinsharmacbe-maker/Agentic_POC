@@ -1,0 +1,31 @@
+[
+  {"source_version": "ODP.banking.customers_raw.v1", "target_version": "FDP.banking.customers_clean.v1"},
+  {"source_version": "FDP.banking.customers_clean.v1", "target_version": "CDP.analytics.customer_360.v1"},
+
+  {"source_version": "ODP.banking.accounts_raw.v1", "target_version": "FDP.banking.accounts_enriched.v1"},
+  {"source_version": "FDP.banking.accounts_enriched.v1", "target_version": "CDP.analytics.account_summary.v1"},
+
+  {"source_version": "ODP.finance.transactions_raw.v1", "target_version": "FDP.finance.transactions_enriched.v1"},
+  {"source_version": "FDP.finance.transactions_enriched.v1", "target_version": "CDP.analytics.transaction_summary.v1"},
+
+  {"source_version": "ODP.finance.loans_raw.v1", "target_version": "FDP.finance.loans_enriched.v1"},
+  {"source_version": "FDP.finance.loans_enriched.v1", "target_version": "CDP.analytics.loan_summary.v1"},
+
+  {"source_version": "ODP.banking.branches_raw.v1", "target_version": "FDP.banking.branch_performance.v1"},
+  {"source_version": "FDP.banking.branch_performance.v1", "target_version": "CDP.analytics.branch_kpi.v1"},
+
+  {"source_version": "ODP.banking.atm_logs_raw.v1", "target_version": "FDP.banking.atm_usage_summary.v1"},
+  {"source_version": "FDP.banking.atm_usage_summary.v1", "target_version": "CDP.analytics.atm_kpi.v1"},
+
+  {"source_version": "ODP.finance.credit_cards_raw.v1", "target_version": "FDP.finance.credit_card_summary.v1"},
+  {"source_version": "FDP.finance.credit_card_summary.v1", "target_version": "CDP.analytics.credit_card_kpi.v1"},
+
+  {"source_version": "ODP.transport.transport_trips_raw.v1", "target_version": "FDP.transport.transport_trip_enriched.v1"},
+  {"source_version": "FDP.transport.transport_trip_enriched.v1", "target_version": "CDP.analytics.transport_kpi.v1"},
+
+  {"source_version": "ODP.transport.fuel_transactions_raw.v1", "target_version": "FDP.transport.fuel_cost_summary.v1"},
+  {"source_version": "FDP.transport.fuel_cost_summary.v1", "target_version": "CDP.analytics.fuel_kpi.v1"},
+
+  {"source_version": "ODP.finance.payments_raw.v1", "target_version": "FDP.finance.payments_enriched.v1"},
+  {"source_version": "FDP.finance.payments_enriched.v1", "target_version": "CDP.analytics.revenue_dashboard.v1"}
+]
